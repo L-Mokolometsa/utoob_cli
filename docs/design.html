@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1400">
+    <title>utoob - Brand Assets Generator</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 40px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            width: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff4444;
+            margin: 0 0 12px 0;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #8b949e;
+            margin: 0 0 60px 0;
+        }
+
+        .section {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff4444;
+            margin: 0 0 24px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+        }
+
+        .asset-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .asset-item {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .asset-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            border-radius: 6px;
+            min-height: 120px;
+        }
+
+        .asset-preview.light {
+            background: #ffffff;
+        }
+
+        .asset-preview.dark {
+            background: #0d1117;
+            border: 1px solid #30363d;
+        }
+
+        .asset-preview.transparent {
+            background:
+                linear-gradient(45deg, #21262d 25%, transparent 25%),
+                linear-gradient(-45deg, #21262d 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #21262d 75%),
+                linear-gradient(-45deg, transparent 75%, #21262d 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .asset-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c9d1d9;
+            margin-bottom: 8px;
+        }
+
+        .asset-description {
+            font-size: 13px;
+            color: #8b949e;
+            margin-bottom: 12px;
+        }
+
+        .download-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #2ea043;
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Logo Styles */
+        .logo-square {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.5), 0 0 60px rgba(255, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-horizontal {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.5), 0 0 40px rgba(255, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .logo-wordmark {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-wordmark-main {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -2px;
+            filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.3));
+        }
+
+        .logo-wordmark-tagline {
+            font-size: 18px;
+            color: #8b949e;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Banner Styles */
+        .banner {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(255, 0, 0, 0.4);
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner-title {
+            font-size: 72px;
+            font-weight: 900;
+            color: white;
+            margin: 0 0 12px 0;
+            letter-spacing: -2px;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-subtitle {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Badge Styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .badge-primary {
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 2px solid #ff4444;
+            color: #ff4444;
+        }
+
+        .badge-dark {
+            background: #21262d;
+            color: white;
+            border: 1px solid #30363d;
+        }
+
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 16px;
+        }
+
+        .icon-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .size-label {
+            text-align: center;
+            font-size: 12px;
+            color: #8b949e;
+            margin-top: 8px;
+        }
+
+        .markdown-code {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            color: #79c0ff;
+            margin-top: 8px;
+            overflow-x: auto;
+        }
+
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 16px;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+
+        .color-label {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Monaco', monospace;
+        }
+
+        .instructions {
+            background: #1f6feb20;
+            border: 1px solid #1f6feb;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .instructions-title {
+            font-weight: 700;
+            color: #58a6ff;
+            margin-bottom: 8px;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+        }
+    </style>
+    <style>
+        @view-transition {
+            navigation: auto;
+        }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+    <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>
+            <svg width="40" height="40" viewbox="0 0 40 40" style="vertical-align: middle; margin-right: 8px;">
+                <circle cx="20" cy="15" r="12" fill="#ff4444" />
+                <ellipse cx="16" cy="13" rx="3" ry="4" fill="#0d1117" />
+                <ellipse cx="24" cy="13" rx="3" ry="4" fill="#0d1117" />
+                <path d="M 12 20 Q 20 24 28 20" stroke="#0d1117" stroke-width="2" fill="none" />
+                <path d="M 20 27 L 18 32 M 20 27 L 22 32" stroke="#ff4444" stroke-width="2" />
+            </svg> utoob Brand Assets
+        </h1>
+        <p class="subtitle">Hacker theme with skull mascot - Professional logos, banners, and badges for your GitHub
+            repository</p><!-- Main Logo -->
+        <section class="section">
+            <h2 class="section-title">📦 Primary Logo</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-label">
+                        Square Logo (Social Media)
+                    </div>
+                    <div class="asset-description">
+                        Perfect for GitHub profile, social media avatars, and app icons
+                    </div>
+                    <div class="asset-preview transparent">
+                        <div class="logo-square" id="logo-square">
+                            <svg width="96" height="96" viewbox="0 0 96 96"
+                                style="filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));">
+                                <circle cx="48" cy="36" r="28" fill="white" />
+                                <ellipse cx="38" cy="32" rx="8" ry="10" fill="#0d1117" />
+                                <ellipse cx="58" cy="32" rx="8" ry="10" fill="#0d1117" />
+                                <path d="M 28 48 Q 48 56 68 48" stroke="#0d1117" stroke-width="4" fill="none" />
+                                <path d="M 48 64 L 44 76 M 48 64 L 52 76" stroke="white" stroke-width="4" />
+                            </svg>
+                            <div class="logo-text">
+                                utoob
+                            </div>
+                        </div>
+                    </div><button class="download-btn" onclick="downloadSquareLogo()">⬇️ Download SVG</button>
+                </div>
+                <div class="asset-item">
+                    <div class="asset-label">
+                        Horizontal Logo (README Header)
+                    </div>
+                    <div class="asset-description">
+                        Best for repository headers and wide banners
+                    </div>
+                    <div class="asset-preview dark">
+                        <div class="logo-horizontal" id="logo-horizontal">
+                            <div class="logo-circle">
+                                <svg width="72" height="72" viewbox="0 0 72 72">
+                                    <circle cx="36" cy="27" r="21" fill="white" />
+                                    <ellipse cx="28.5" cy="24" rx="6" ry="7.5" fill="#0d1117" />
+                                    <ellipse cx="43.5" cy="24" rx="6" ry="7.5" fill="#0d1117" />
+                                    <path d="M 21 36 Q 36 42 51 36" stroke="#0d1117" stroke-width="3" fill="none" />
+                                    <path d="M 36 48 L 33 57 M 36 48 L 39 57" stroke="white" stroke-width="3" />
+                                </svg>
+                            </div>
+                            <div class="logo-wordmark">
+                                <div class="logo-wordmark-main">
+                                    utoob
+                                </div>
+                                <div class="logo-wordmark-tagline">
+                                    Smart YouTube Downloader
+                                </div>
+                            </div>
+                        </div>
+                    </div><button class="download-btn" onclick="downloadHorizontalLogo()">⬇️ Download SVG</button>
+                </div>
+            </div>
+        </section><!-- Repository Banner -->
+        <section class="section">
+            <h2 class="section-title">🎨 Repository Banner</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-label">
+                        Hero Banner (1200x320)
+                    </div>
+                    <div class="asset-description">
+                        Full-width banner for your README.md header
+                    </div>
+                    <div class="asset-preview transparent">
+                        <div class="banner" id="banner" style="transform: scale(0.8); transform-origin: center;">
+                            <div class="banner-content">
+                                <div class="banner-title">
+                                    utoob
+                                </div>
+                                <div class="banner-subtitle">
+                                    Smart YouTube Downloader
+                                </div>
+                            </div>
+                            <svg width="180" height="180" viewbox="0 0 180 180"
+                                style="position: relative; z-index: 2; opacity: 0.9; filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3));">
+                                <circle cx="90" cy="67.5" r="52.5" fill="white" />
+                                <ellipse cx="71.25" cy="60" rx="15" ry="18.75" fill="#8b0000" />
+                                <ellipse cx="108.75" cy="60" rx="15" ry="18.75" fill="#8b0000" />
+                                <path d="M 52.5 90 Q 90 105 127.5 90" stroke="#8b0000" stroke-width="7.5" fill="none" />
+                                <path d="M 90 120 L 82.5 142.5 M 90 120 L 97.5 142.5" stroke="white"
+                                    stroke-width="7.5" />
+                            </svg>
+                        </div>
+                    </div><button class="download-btn" onclick="downloadBanner()">⬇️ Download SVG</button>
+                    <div class="markdown-code">
+                        &lt;img src="./assets/utoob-banner.svg" alt="utoob - Smart YouTube Downloader" width="100%"&gt;
+                    </div>
+                </div>
+            </div>
+        </section><!-- Badges -->
+        <section class="section">
+            <h2 class="section-title">🏷️ Badges &amp; Labels</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-label">
+                        Custom Badges
+                    </div>
+                    <div class="asset-description">
+                        Pre-styled badges for your README
+                    </div>
+                    <div class="asset-preview light">
+                        <div class="badges-container">
+                            <div class="badge badge-primary">
+                                ⬇️ Download
+                            </div>
+                            <div class="badge badge-primary">
+                                🐍 Python 3.7+
+                            </div>
+                            <div class="badge badge-outline">
+                                📦 v1.0.0
+                            </div>
+                            <div class="badge badge-outline">
+                                ✅ Cross-Platform
+                            </div>
+                            <div class="badge badge-dark">
+                                🎵 Metadata Support
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instructions">
+                        <div class="instructions-title">
+                            Markdown Examples:
+                        </div>
+                        <div class="markdown-code">
+                            ![Python](https://img.shields.io/badge/Python-3.7+-ff0000?style=for-the-badge&amp;logo=python&amp;logoColor=white)
+                            ![Platform](https://img.shields.io/badge/Platform-Cross--Platform-8b0000?style=for-the-badge)
+                            ![License](https://img.shields.io/badge/License-MIT-ff4444?style=for-the-badge)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- Icon Sizes -->
+        <section class="section">
+            <h2 class="section-title">📐 Icon Sizes</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-label">
+                        App Icons (Multiple Sizes)
+                    </div>
+                    <div class="asset-description">
+                        Standard icon sizes for various platforms
+                    </div>
+                    <div class="asset-preview transparent">
+                        <div class="icon-grid">
+                            <div>
+                                <div class="icon-item" id="icon-16"
+                                    style="width: 16px; height: 16px; border-radius: 3px;">
+                                    <svg width="12" height="12" viewbox="0 0 24 24">
+                                        <circle cx="12" cy="9" r="7" fill="white" />
+                                        <ellipse cx="9.5" cy="8" rx="2" ry="2.5" fill="#8b0000" />
+                                        <ellipse cx="14.5" cy="8" rx="2" ry="2.5" fill="#8b0000" />
+                                        <path d="M 7 12 Q 12 14 17 12" stroke="#8b0000" stroke-width="1" fill="none" />
+                                        <path d="M 12 16 L 11 19 M 12 16 L 13 19" stroke="white" stroke-width="1" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    16×16
+                                </div>
+                            </div>
+                            <div>
+                                <div class="icon-item" id="icon-32"
+                                    style="width: 32px; height: 32px; border-radius: 6px;">
+                                    <svg width="24" height="24" viewbox="0 0 24 24">
+                                        <circle cx="12" cy="9" r="7" fill="white" />
+                                        <ellipse cx="9.5" cy="8" rx="2" ry="2.5" fill="#8b0000" />
+                                        <ellipse cx="14.5" cy="8" rx="2" ry="2.5" fill="#8b0000" />
+                                        <path d="M 7 12 Q 12 14 17 12" stroke="#8b0000" stroke-width="1.5"
+                                            fill="none" />
+                                        <path d="M 12 16 L 11 19 M 12 16 L 13 19" stroke="white" stroke-width="1.5" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    32×32
+                                </div>
+                            </div>
+                            <div>
+                                <div class="icon-item" id="icon-64"
+                                    style="width: 64px; height: 64px; border-radius: 12px;">
+                                    <svg width="48" height="48" viewbox="0 0 48 48">
+                                        <circle cx="24" cy="18" r="14" fill="white" />
+                                        <ellipse cx="19" cy="16" rx="4" ry="5" fill="#8b0000" />
+                                        <ellipse cx="29" cy="16" rx="4" ry="5" fill="#8b0000" />
+                                        <path d="M 14 24 Q 24 28 34 24" stroke="#8b0000" stroke-width="2" fill="none" />
+                                        <path d="M 24 32 L 22 38 M 24 32 L 26 38" stroke="white" stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    64×64
+                                </div>
+                            </div>
+                            <div>
+                                <div class="icon-item" id="icon-128"
+                                    style="width: 128px; height: 128px; border-radius: 24px;">
+                                    <svg width="96" height="96" viewbox="0 0 96 96">
+                                        <circle cx="48" cy="36" r="28" fill="white" />
+                                        <ellipse cx="38" cy="32" rx="8" ry="10" fill="#8b0000" />
+                                        <ellipse cx="58" cy="32" rx="8" ry="10" fill="#8b0000" />
+                                        <path d="M 28 48 Q 48 56 68 48" stroke="#8b0000" stroke-width="4" fill="none" />
+                                        <path d="M 48 64 L 44 76 M 48 64 L 52 76" stroke="white" stroke-width="4" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    128×128
+                                </div>
+                            </div>
+                            <div>
+                                <div class="icon-item" id="icon-256"
+                                    style="width: 256px; height: 256px; border-radius: 48px;">
+                                    <svg width="192" height="192" viewbox="0 0 192 192">
+                                        <circle cx="96" cy="72" r="56" fill="white" />
+                                        <ellipse cx="76" cy="64" rx="16" ry="20" fill="#8b0000" />
+                                        <ellipse cx="116" cy="64" rx="16" ry="20" fill="#8b0000" />
+                                        <path d="M 56 96 Q 96 112 136 96" stroke="#8b0000" stroke-width="8"
+                                            fill="none" />
+                                        <path d="M 96 128 L 88 152 M 96 128 L 104 152" stroke="white"
+                                            stroke-width="8" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    256×256
+                                </div>
+                            </div>
+                            <div>
+                                <div class="icon-item" id="icon-512"
+                                    style="width: 512px; height: 512px; border-radius: 96px;">
+                                    <svg width="384" height="384" viewbox="0 0 384 384">
+                                        <circle cx="192" cy="144" r="112" fill="white" />
+                                        <ellipse cx="152" cy="128" rx="32" ry="40" fill="#8b0000" />
+                                        <ellipse cx="232" cy="128" rx="32" ry="40" fill="#8b0000" />
+                                        <path d="M 112 192 Q 192 224 272 192" stroke="#8b0000" stroke-width="16"
+                                            fill="none" />
+                                        <path d="M 192 256 L 176 304 M 192 256 L 208 304" stroke="white"
+                                            stroke-width="16" />
+                                    </svg>
+                                </div>
+                                <div class="size-label">
+                                    512×512
+                                </div>
+                            </div>
+                        </div>
+                    </div><button class="download-btn" onclick="downloadAllIcons()">⬇️ Download All Sizes</button>
+                </div>
+            </div>
+        </section><!-- Color Palette -->
+        <section class="section">
+            <h2 class="section-title">🎨 Brand Colors</h2>
+            <div class="asset-grid">
+                <div class="asset-item">
+                    <div class="asset-label">
+                        Official Color Palette
+                    </div>
+                    <div class="asset-description">
+                        Click any color to copy the hex code
+                    </div>
+                    <div class="asset-preview light">
+                        <div class="color-palette">
+                            <div class="color-swatch" style="background: #ff0000;" onclick="copyColor('#ff0000')">
+                                <div class="color-label">
+                                    #ff0000
+                                </div>
+                            </div>
+                            <div class="color-swatch" style="background: #8b0000;" onclick="copyColor('#8b0000')">
+                                <div class="color-label">
+                                    #8b0000
+                                </div>
+                            </div>
+                            <div class="color-swatch" style="background: #ff4444;" onclick="copyColor('#ff4444')">
+                                <div class="color-label">
+                                    #ff4444
+                                </div>
+                            </div>
+                            <div class="color-swatch" style="background: #238636;" onclick="copyColor('#238636')">
+                                <div class="color-label">
+                                    #238636
+                                </div>
+                            </div>
+                            <div class="color-swatch" style="background: #0d1117;" onclick="copyColor('#0d1117')">
+                                <div class="color-label">
+                                    #0d1117
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instructions">
+                        <div class="instructions-title">
+                            Usage Guidelines:
+                        </div> • <strong>#ff0000</strong> - Primary brand color (bold red, gradients, headers)<br>
+                        • <strong>#8b0000</strong> - Dark red accent (gradient end, shadows, depth)<br>
+                        • <strong>#ff4444</strong> - Light red highlights (links, text, interactive elements)<br>
+                        • <strong>#238636</strong> - Success states and download buttons<br>
+                        • <strong>#0d1117</strong> - Dark backgrounds (GitHub dark theme)
+                    </div>
+                </div>
+            </div>
+        </section><!-- Setup Instructions -->
+        <section class="section">
+            <h2 class="section-title">📝 GitHub Setup Guide</h2>
+            <div class="instructions">
+                <div class="instructions-title">
+                    Step 1: Create assets folder
+                </div>
+                <div class="markdown-code">
+                    mkdir assets &amp;&amp; cd assets
+                </div>
+                <div class="instructions-title" style="margin-top: 16px;">
+                    Step 2: Download assets from this page
+                </div> Save the downloaded SVG files to your <code>assets/</code> folder
+                <div class="instructions-title" style="margin-top: 16px;">
+                    Step 3: Update your README.md
+                </div>
+                <div class="markdown-code">
+                    &lt;div align="center"&gt; &lt;img src="./assets/utoob-banner.svg" alt="utoob" width="100%"&gt;
+                    ![Python](https://img.shields.io/badge/Python-3.7+-ff0000?style=for-the-badge&amp;logo=python)
+                    ![Platform](https://img.shields.io/badge/Platform-Cross--Platform-8b0000?style=for-the-badge) ### 🎬
+                    Smart YouTube Downloader *A lightweight, self-installing CLI tool for downloading YouTube
+                    videos/audio*
+                    [![Download](https://img.shields.io/badge/⬇️_Download-utoob.py-ff0000?style=for-the-badge)](https://raw.githubusercontent.com/YOUR_USERNAME/utoob/main/utoob.py)
+                    &lt;/div&gt;
+                </div>
+                <div class="instructions-title" style="margin-top: 16px;">
+                    Step 4: Set repository social preview
+                </div> 1. Go to your GitHub repository<br>
+                2. Click Settings → Options<br>
+                3. Scroll to "Social preview"<br>
+                4. Upload <code>utoob-logo-square.svg</code> (1200×630 recommended)
+            </div>
+        </section>
+    </div>
+    <script>
+        function createSkullSVG(size) {
+            const scale = size / 96;
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 96 96">
+                <circle cx="48" cy="36" r="28" fill="white"/>
+                <ellipse cx="38" cy="32" rx="8" ry="10" fill="#0d1117"/>
+                <ellipse cx="58" cy="32" rx="8" ry="10" fill="#0d1117"/>
+                <path d="M 28 48 Q 48 56 68 48" stroke="#0d1117" stroke-width="4" fill="none"/>
+                <path d="M 48 64 L 44 76 M 48 64 L 52 76" stroke="white" stroke-width="4"/>
+            </svg>`;
+        }
+
+        function downloadSquareLogo() {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="shadow1">
+                        <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+                        <feOffset dx="0" dy="8" result="offsetblur"/>
+                        <feComponentTransfer>
+                            <feFuncA type="linear" slope="0.5"/>
+                        </feComponentTransfer>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <rect width="200" height="200" rx="32" fill="url(#grad1)" filter="url(#shadow1)"/>
+                <g transform="translate(52, 40)">
+                    <circle cx="48" cy="36" r="28" fill="white" filter="drop-shadow(0 0 10px rgba(0, 0, 0, 0.5))"/>
+                    <ellipse cx="38" cy="32" rx="8" ry="10" fill="#0d1117"/>
+                    <ellipse cx="58" cy="32" rx="8" ry="10" fill="#0d1117"/>
+                    <path d="M 28 48 Q 48 56 68 48" stroke="#0d1117" stroke-width="4" fill="none"/>
+                    <path d="M 48 64 L 44 76 M 48 64 L 52 76" stroke="white" stroke-width="4"/>
+                </g>
+                <text x="100" y="150" font-family="Arial, sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-1">utoob</text>
+            </svg>`;
+
+            downloadSVG(svg, 'utoob-logo-square.svg');
+        }
+
+        function downloadHorizontalLogo() {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="180" viewBox="0 0 600 180">
+                <defs>
+                    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="90" cy="90" r="60" fill="url(#grad2)" filter="drop-shadow(0 8px 32px rgba(255, 0, 0, 0.5))"/>
+                <g transform="translate(54, 63)">
+                    <circle cx="36" cy="27" r="21" fill="white"/>
+                    <ellipse cx="28.5" cy="24" rx="6" ry="7.5" fill="#0d1117"/>
+                    <ellipse cx="43.5" cy="24" rx="6" ry="7.5" fill="#0d1117"/>
+                    <path d="M 21 36 Q 36 42 51 36" stroke="#0d1117" stroke-width="3" fill="none"/>
+                    <path d="M 36 48 L 33 57 M 36 48 L 39 57" stroke="white" stroke-width="3"/>
+                </g>
+                <text x="200" y="110" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="url(#textGrad)" letter-spacing="-2">utoob</text>
+                <text x="200" y="138" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#8b949e">Smart YouTube Downloader</text>
+            </svg>`;
+
+            downloadSVG(svg, 'utoob-logo-horizontal.svg');
+        }
+
+        function downloadBanner() {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320">
+                <defs>
+                    <linearGradient id="bannerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+                    </linearGradient>
+                    <radialGradient id="glow">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+                        <stop offset="70%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+                    </radialGradient>
+                </defs>
+                <rect width="1200" height="320" rx="12" fill="url(#bannerGrad)"/>
+                <circle cx="1050" cy="160" r="300" fill="url(#glow)"/>
+                <text x="80" y="150" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="white" letter-spacing="-2">utoob</text>
+                <text x="80" y="190" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="rgba(255,255,255,0.95)">Smart YouTube Downloader</text>
+                <g transform="translate(960, 70)" opacity="0.9" filter="drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3))">
+                    <circle cx="90" cy="67.5" r="52.5" fill="white"/>
+                    <ellipse cx="71.25" cy="60" rx="15" ry="18.75" fill="#8b0000"/>
+                    <ellipse cx="108.75" cy="60" rx="15" ry="18.75" fill="#8b0000"/>
+                    <path d="M 52.5 90 Q 90 105 127.5 90" stroke="#8b0000" stroke-width="7.5" fill="none"/>
+                    <path d="M 90 120 L 82.5 142.5 M 90 120 L 97.5 142.5" stroke="white" stroke-width="7.5"/>
+                </g>
+            </svg>`;
+
+            downloadSVG(svg, 'utoob-banner.svg');
+        }
+
+        function downloadIcon(size) {
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+                <defs>
+                    <linearGradient id="iconGrad${size}" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#ff0000;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="${size}" height="${size}" rx="${size * 0.2}" fill="url(#iconGrad${size})"/>
+                <g transform="translate(${size * 0.25}, ${size * 0.2})">
+                    <circle cx="${size * 0.25}" cy="${size * 0.1875}" r="${size * 0.145833}" fill="white"/>
+                    <ellipse cx="${size * 0.197917}" cy="${size * 0.166667}" rx="${size * 0.041667}" ry="${size * 0.052083}" fill="#8b0000"/>
+                    <ellipse cx="${size * 0.302083}" cy="${size * 0.166667}" rx="${size * 0.041667}" ry="${size * 0.052083}" fill="#8b0000"/>
+                    <path d="M ${size * 0.145833} ${size * 0.25} Q ${size * 0.25} ${size * 0.291667} ${size * 0.354167} ${size * 0.25}" stroke="#8b0000" stroke-width="${size * 0.020833}" fill="none"/>
+                    <path d="M ${size * 0.25} ${size * 0.333333} L ${size * 0.229167} ${size * 0.395833} M ${size * 0.25} ${size * 0.333333} L ${size * 0.270833} ${size * 0.395833}" stroke="white" stroke-width="${size * 0.020833}"/>
+                </g>
+            </svg>`;
+
+            return svg;
+        }
+
+        function downloadAllIcons() {
+            const sizes = [16, 32, 64, 128, 256, 512];
+            let downloaded = 0;
+
+            sizes.forEach((size, index) => {
+                setTimeout(() => {
+                    const svg = downloadIcon(size);
+                    downloadSVG(svg, `utoob-icon-${size}x${size}.svg`);
+                    downloaded++;
+
+                    if (downloaded === sizes.length) {
+                        showFeedback(event.target, `✅ Downloaded ${sizes.length} icons!`);
+                    }
+                }, index * 300);
+            });
+        }
+
+        function downloadSVG(svgContent, filename) {
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            if (event && event.target && event.target.classList.contains('download-btn')) {
+                showFeedback(event.target, '✅ Downloaded!');
+            }
+        }
+
+        function showFeedback(button, message) {
+            const originalText = button.textContent;
+            button.textContent = message;
+            button.style.background = '#238636';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+
+        function copyColor(color) {
+            navigator.clipboard.writeText(color).then(() => {
+                const feedback = document.createElement('div');
+                feedback.textContent = `Copied ${color}!`;
+                feedback.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #238636;
+                    color: white;
+                    padding: 16px 32px;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    font-size: 16px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+                    z-index: 9999;
+                    animation: fadeInOut 2s ease;
+                `;
+
+                document.body.appendChild(feedback);
+                setTimeout(() => feedback.remove(), 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>

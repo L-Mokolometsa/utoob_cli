@@ -1,10 +1,15 @@
-# 🎬 utoob – Smart YouTube Downloader
+<div align="center"> <img src="./assets/utoob-banner.svg" alt="utoob" width="100%">
 
-A lightweight, self‑installing CLI tool that downloads YouTube videos/audio, organizes them, and embeds proper metadata (track numbers, real album covers via MusicBrainz).
+![Python](https://img.shields.io/badge/Python-3.7+-ff0000?style=for-the-badge&logo=python&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Cross--Platform-8b0000?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-ff4444?style=for-the-badge)
 
-<div align="center">
+### 🎬 Smart YouTube Downloader
+*Lightweight Python CLI tool for downloading YouTube videos, converting to MP3, batch downloads, and playlist management. Self-installing with automatic yt-dlp dependency handling. No configuration needed.*
 
-[![Download utoob.py](https://img.shields.io/badge/⬇️_Download-utoob.py-blue?style=for-the-badge&logo=python)](https://raw.githubusercontent.com/YOUR_USERNAME/utoob/main/utoob.py)
+**Keywords**: youtube downloader, youtube to mp3, video downloader cli, yt-dlp wrapper, python youtube, batch video download, playlist downloader, youtube audio extractor, self-contained youtube tool
+
+[![Download](https://img.shields.io/badge/⬇️_Download-utoob.py-ff0000?style=for-the-badge)](https://raw.githubusercontent.com/L-Mokolometsa/utoob/main/utoob.py)
 
 </div>
 
@@ -24,26 +29,64 @@ utoob/
 ```
 All system‑related files are now isolated in `sys_files/`, keeping your `downloads/` folder clean.
 
+> **Note:** After the first run, the script moves itself into the `utoob/` folder, and all downloads are stored in `utoob/downloads/`.
+
 ---
 
 ## 🚀 Installation
-1. **Clone the repository**:
+
+### Quick Start (Recommended)
+1. **Download the script**:
 ```bash
-git clone https://github.com/YOUR_USERNAME/utoob.git
-cd utoob
+wget https://raw.githubusercontent.com/L-Mokolometsa/utoob/main/utoob.py
+# OR
+curl -O https://raw.githubusercontent.com/L-Mokolometsa/utoob/main/utoob.py
 ```
-2. **Install dependencies**:
+
+2. **Install required Python packages**:
 ```bash
-sudo apt install ffmpeg  # Ubuntu/Debian
-pip install -r requirements.txt
+pip install requests mutagen
 ```
-3. **Run it** – the script will self-install into a `utoob/` folder:
+
+3. **Install ffmpeg** (required for audio conversion):
+```bash
+# Ubuntu/Debian
+sudo apt install ffmpeg
+
+# macOS
+brew install ffmpeg
+
+# Windows (via chocolatey)
+choco install ffmpeg
+```
+
+4. **Run it** – the script handles the rest:
 ```bash
 python3 utoob.py
 ```
-   *On first run, you'll be asked:*
-   - ✅ **Install globally?** - Choose `y` to run `utoob` from anywhere, or `n` for local use only
-   - The script will create the `utoob/` folder and set up `sys_files/`
+
+### What Gets Installed?
+On first run, `utoob.py` will:
+1. **Create a `utoob/` folder** in your current directory
+2. **Move itself** into `utoob/utoob.py`
+3. **Create `sys_files/` subdirectory** with:
+   - `cache/` - stores the **yt-dlp binary** (auto-downloaded, ~20MB)
+   - `history.db` - SQLite database tracking your downloads
+   - `config.json` - user preferences (created as needed)
+4. **Create `downloads/` folder** for your media files
+5. **Optionally** install a global command (`~/.local/bin/utoob`) if you choose `y` when prompted
+
+**Total disk usage**: ~25MB (script + yt-dlp binary + database)
+
+> ⚠️ **Note**: The script does NOT install any system-level packages or modify system files outside of the `utoob/` folder and optionally `~/.local/bin/`.
+
+### Alternative: Clone the Repository
+```bash
+git clone https://github.com/L-Mokolometsa/utoob.git
+cd utoob
+pip install -r requirements.txt
+python3 utoob.py
+```
 
 ---
 
@@ -66,12 +109,27 @@ Or create a batch file manually in a directory that's in your PATH.
 
 ---
 
-## 🎨 Visual Banner
-On start you'll see a colorful banner:
+## 🎨 Screenshots
 
-![Main Menu](https://github.com/YOUR_USERNAME/utoob/releases/download/v1.0.0/utoob_menu.png)
+### Main Menu & Banner
+![Main Menu](./assets/screenshots/01-banner-menu.png)
 
-If `pyfiglet` and `termcolor` are installed, the banner is rendered in a rainbow of colors.
+The startup banner features our nefarious ASCII skull mascot. If `pyfiglet` and `termcolor` are installed, you'll see colorful text rendering.
+
+### Video Download
+![Video Download](./assets/screenshots/02-video-download.png)
+
+Downloading a video with progress tracking and automatic quality selection.
+
+### Audio Extraction (MP3)
+![Audio Download](./assets/screenshots/03-audio-download.png)
+
+Converting YouTube videos to MP3 with automatic audio extraction.
+
+### Playlist Detection
+![Playlist Detection](./assets/screenshots/04-playlist-detection.png)
+
+Smart playlist detection with confirmation prompts before batch downloads.
 
 ---
 
@@ -110,4 +168,22 @@ If you only want to delete the program but keep your media, just delete the `uto
 - **MusicBrainz API** – used for album‑cover lookup.
 - **yt‑dlp** – automatically downloaded on first run and stored in `sys_files/cache/`.
 
-Enjoy a tidy, intelligent YouTube downloader! 🎵
+---
+
+## 🏷️ Tech Stack
+- **Python 3.7+** - Main language
+- **yt-dlp** - YouTube media extraction (auto-downloaded)
+- **ffmpeg** - Audio/video processing
+- **SQLite** - Download history tracking
+- **Mutagen** - ID3 metadata tagging
+- **MusicBrainz API** - Album artwork retrieval
+
+---
+
+## 🔍 Related Topics
+`youtube-downloader` `youtube-to-mp3` `video-downloader` `yt-dlp` `python-cli` `batch-download` `playlist-downloader` `youtube-audio` `mp3-converter` `self-contained` `portable-tool` `cli-application`
+
+---
+
+Enjoy! 🎵
+
